@@ -5,6 +5,8 @@ const cors = require("cors");
 const path = require("path");
 const dotenv = require("dotenv");
 
+const taskRoutes = require("./routes/task");
+
 dotenv.config({ path: path.resolve(__dirname, "../../.env") });
 
 const app = express();
@@ -29,11 +31,7 @@ app.use(cors());
 app.use(bodyParser.json());
 
 // Routes
-// const authRoutes = require("./routes/authRoutes");
-// const todoRoutes = require("./routes/todoRoutes");
-
-// app.use("/auth", authRoutes);
-// app.use("/todo", todoRoutes);
+app.use("/api/tasks", taskRoutes);
 
 // Start the server
 app.listen(PORT, () => {
