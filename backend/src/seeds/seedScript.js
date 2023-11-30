@@ -23,7 +23,8 @@ async function seedDB() {
     for (let i = 0; i < 10; i++) {
       users.push({
         username: `user${i}`,
-        password: "password",
+        password:
+          "$2b$10$tSYb7Q8oggjqBqeP1s1TtejFVTrLCvETUHGaZ12hNG/yrij0dV0Dm",
       });
     }
     const seededUsers = await User.insertMany(users);

@@ -6,6 +6,7 @@ const path = require("path");
 const dotenv = require("dotenv");
 
 const taskRoutes = require("./routes/task");
+const userRoutes = require("./routes/user");
 
 dotenv.config({ path: path.resolve(__dirname, "../../.env") });
 
@@ -32,6 +33,7 @@ app.use(bodyParser.json());
 
 // Routes
 app.use("/api/tasks", taskRoutes);
+app.use("/api/user", userRoutes);
 
 // Start the server
 app.listen(PORT, () => {
