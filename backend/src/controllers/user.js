@@ -26,6 +26,12 @@ exports.register = async (req, res) => {
     const newUser = new User({ username, password: hashedPassword });
     await newUser.save();
 
+    // Generate a JWT token
+    const token = jwt.sign({ userId: newUser._id }, process.env.JWT_SECRET);
+
+    // Set the token in a cookie
+    res.cookie("token", token, { httpOnly: true, secure: true });
+
     res.status(201).json({ message: "User registered successfully" });
   } catch (error) {
     console.error(error);
