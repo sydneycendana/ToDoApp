@@ -4,6 +4,7 @@ const bodyParser = require("body-parser");
 const cors = require("cors");
 const path = require("path");
 const dotenv = require("dotenv");
+const cookieParser = require("cookie-parser");
 
 const taskRoutes = require("./routes/task");
 const userRoutes = require("./routes/user");
@@ -30,6 +31,7 @@ mongoose.connection.on("error", (err) => {
 // Middleware
 app.use(cors());
 app.use(bodyParser.json());
+app.use(cookieParser());
 
 // Routes
 app.use("/api/tasks", taskRoutes);
