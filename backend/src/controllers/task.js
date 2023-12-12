@@ -1,12 +1,18 @@
 const Task = require("../models/task");
 const { authenticateUser, checkTaskOwnership } = require("./auth");
+const jwt = require("jsonwebtoken");
 
 // Get all tasks
 exports.getAllTasks = [
   authenticateUser,
   async (req, res) => {
     try {
-      const tasks = await Task.find();
+      const token = req.cookies.token;
+
+      const decoded = jwt.verify(token, process.env.JWT_SECRET);
+      req.userId = decoded.userId;
+      console.log(req.userId);
+      const tasks = await Task.find({ owner: req.userId });
       res.json(tasks);
     } catch (error) {
       res.status(500).json({ message: "Internal Server Error" });
