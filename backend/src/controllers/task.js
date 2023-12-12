@@ -1,18 +1,32 @@
 const Task = require("../models/task");
 const { authenticateUser, checkTaskOwnership } = require("./auth");
 const jwt = require("jsonwebtoken");
+const moment = require("moment");
 
-// Get all tasks
 exports.getAllTasks = [
   authenticateUser,
   async (req, res) => {
     try {
       const token = req.cookies.token;
-
       const decoded = jwt.verify(token, process.env.JWT_SECRET);
       req.userId = decoded.userId;
-      console.log(req.userId);
-      const tasks = await Task.find({ owner: req.userId });
+
+      // Get the current week index from the query parameter or default to 0 (current week)
+      const weekIndex = parseInt(req.query.weekIndex) || 0;
+
+      // Calculate the target date based on the current date and the week index
+      const targetDate = moment().add(weekIndex, "weeks");
+
+      // Get the start and end dates of the target week
+      const startOfWeek = targetDate.clone().startOf("week");
+      const endOfWeek = targetDate.clone().endOf("week");
+
+      // Modify the query to fetch tasks within the specified week
+      const tasks = await Task.find({
+        owner: req.userId,
+        dueDate: { $gte: startOfWeek.toDate(), $lte: endOfWeek.toDate() },
+      });
+
       res.json(tasks);
     } catch (error) {
       res.status(500).json({ message: "Internal Server Error" });
