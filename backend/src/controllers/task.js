@@ -27,6 +27,12 @@ exports.getAllTasks = [
         dueDate: { $gte: startOfWeek.toDate(), $lte: endOfWeek.toDate() },
       });
 
+      if (tasks.length === 0) {
+        return res
+          .status(404)
+          .json({ message: "No tasks found for the specified criteria" });
+      }
+
       res.json(tasks);
     } catch (error) {
       res.status(500).json({ message: "Internal Server Error" });
