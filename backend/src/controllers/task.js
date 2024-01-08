@@ -17,6 +17,8 @@ exports.getAllTasks = [
       // Calculate the target date based on the current date and the week index
       const targetDate = moment().add(weekIndex, "weeks");
 
+      console.log(targetDate);
+
       // Get the start and end dates of the target week
       const startOfWeek = targetDate.clone().startOf("week");
       const endOfWeek = targetDate.clone().endOf("week");
@@ -24,7 +26,7 @@ exports.getAllTasks = [
       // Modify the query to fetch tasks within the specified week
       const tasks = await Task.find({
         owner: req.userId,
-        dueDate: { $gte: startOfWeek.toDate(), $lte: endOfWeek.toDate() },
+        dueDate: { $gte: startOfWeek.toDate(), $lt: endOfWeek.toDate() },
       });
 
       if (tasks.length === 0) {

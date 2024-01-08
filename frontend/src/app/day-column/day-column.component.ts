@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { Task } from '../task.model';
 
 @Component({
   selector: 'app-day-column',
@@ -11,7 +12,7 @@ import { CommonModule } from '@angular/common';
 export class DayColumnComponent {
   @Input() day: Date | undefined;
   // Add an input property for tasks associated with the day
-  @Input() tasks: string[] = [];
+  @Input() tasks: Task[] = [];
 
   constructor() {}
 }
