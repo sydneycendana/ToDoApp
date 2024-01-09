@@ -17,8 +17,6 @@ exports.getAllTasks = [
       // Calculate the target date based on the current date and the week index
       const targetDate = moment().add(weekIndex, "weeks");
 
-      console.log(targetDate);
-
       // Get the start and end dates of the target week
       const startOfWeek = targetDate.clone().startOf("week");
       const endOfWeek = targetDate.clone().endOf("week");
