@@ -1,13 +1,13 @@
 export interface Task {
   recurringInfo?: {
-    daysOfWeek: number[];
+    daysOfWeek: string[];
     daysOfMonth: number[];
   };
   _id: string;
   title: string;
   owner: string;
-  dueDate: string;
+  dueDate: Date;
   completed: boolean;
   recurring: boolean;
-  __v: number;
+  // __v: number;
 }
