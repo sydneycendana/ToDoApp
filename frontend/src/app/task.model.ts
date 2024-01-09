@@ -1,8 +1,4 @@
 export interface Task {
-  recurringInfo?: {
-    daysOfWeek: string[];
-    daysOfMonth: number[];
-  };
   _id: string;
   title: string;
   owner: string;
@@ -10,4 +6,8 @@ export interface Task {
   completed: boolean;
   recurring: boolean;
   // __v: number;
+  recurringInfo?: {
+    daysOfWeek: string[];
+    daysOfMonth: number[];
+  };
 }
