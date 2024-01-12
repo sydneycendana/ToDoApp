@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { AuthService } from '../auth.service';
 import { FormsModule } from '@angular/forms';
+import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-login',
@@ -28,6 +29,12 @@ export class LoginComponent {
       (response) => {
         // Handle successful login, you might store the token or redirect to another page
         console.log('Login successful', response);
+        console.log('Token', response.token);
+
+        const token = response.token;
+
+        // Store the token in local storage
+        localStorage.setItem('token', token);
       },
       (error) => {
         // Handle login error, show a message, etc.

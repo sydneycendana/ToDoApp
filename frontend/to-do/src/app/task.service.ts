@@ -16,8 +16,11 @@ export class TaskService {
     // const params = weekIndex !== undefined ? { weekIndex } : {};
     const url = this.apiUrl + '/';
     const options = weekIndex
-      ? { params: new HttpParams().set('weekIndex', weekIndex) }
-      : {};
+      ? {
+          params: new HttpParams().set('weekIndex', weekIndex),
+          withCredentials: true,
+        }
+      : { withCredentials: true };
 
     return this.http.get<Task[]>(url, options).pipe(
       catchError((error) => {
