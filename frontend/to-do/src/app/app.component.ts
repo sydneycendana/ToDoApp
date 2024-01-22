@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
 import { TaskListComponent } from './task-list/task-list.component';
 import { LoginComponent } from './login/login.component';
+import { AuthService } from './auth.service';
 import { FormsModule } from '@angular/forms';
 
 @Component({
@@ -20,4 +21,10 @@ import { FormsModule } from '@angular/forms';
 })
 export class AppComponent {
   title = 'to-do';
+
+  constructor(private authService: AuthService) {}
+
+  get isLoggedIn(): boolean {
+    return this.authService.isLoggedIn;
+  }
 }

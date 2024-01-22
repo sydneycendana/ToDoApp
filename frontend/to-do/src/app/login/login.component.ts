@@ -27,18 +27,10 @@ export class LoginComponent {
     console.log(this.credentials);
     this.authService.login(this.credentials).subscribe(
       (response) => {
-        // Handle successful login, you might store the token or redirect to another page
-        console.log('Login successful', response);
-        console.log('Token', response.idToken);
-
         const token = response.idToken;
-
-        // Store the token in local storage
         localStorage.setItem('token', token);
       },
       (error) => {
-        // Handle login error, show a message, etc.
-        console.log('hello');
         console.error('Login error', error);
       }
     );
