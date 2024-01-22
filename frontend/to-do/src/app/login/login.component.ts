@@ -29,9 +29,9 @@ export class LoginComponent {
       (response) => {
         // Handle successful login, you might store the token or redirect to another page
         console.log('Login successful', response);
-        console.log('Token', response.token);
+        console.log('Token', response.idToken);
 
-        const token = response.token;
+        const token = response.idToken;
 
         // Store the token in local storage
         localStorage.setItem('token', token);

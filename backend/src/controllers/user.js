@@ -63,7 +63,7 @@ exports.login = async (req, res) => {
 
     res.cookie("token", token, { httpOnly: true, secure: true });
 
-    res.json({ message: "Login successful" });
+    res.json({ message: "Login successful", idToken: token });
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: "Internal Server Error" });
